@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Clubes.Mobile.MainPage"
+             Title="Início"
+             BackgroundColor="#F6F8F6">
+    <ScrollView>
+        <VerticalStackLayout Padding="22,26" Spacing="18">
+            <Label Text="ÁREA DO ASSOCIADO" FontSize="11" CharacterSpacing="1.5" FontAttributes="Bold" TextColor="#6B8C7E" />
+            <Label Text="Bem-vindo ao seu clube." FontSize="29" FontAttributes="Bold" TextColor="#18312D" LineBreakMode="WordWrap" />
+            <Label Text="Acompanhe eventos, mensalidades e pedidos em um só lugar." FontSize="14" TextColor="#71817B" LineBreakMode="WordWrap" />
+
+            <Border Padding="18" Stroke="#DCE8E2" StrokeShape="RoundRectangle 18" BackgroundColor="#FFFFFF">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="SEUS CLUBES" FontSize="10" CharacterSpacing="1.2" FontAttributes="Bold" TextColor="#7B938A" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="↗" FontSize="18" TextColor="#1F6658" VerticalOptions="Center" />
+                    </Grid>
+                    <Label Text="Seus vínculos aparecerão aqui" FontSize="17" FontAttributes="Bold" TextColor="#18312D" />
+                    <Label Text="Entre com sua conta quando a API estiver conectada para carregar os clubes associados ao seu CPF." FontSize="12" TextColor="#71817B" LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="14" Stroke="#E8E7DD" StrokeShape="RoundRectangle 14" BackgroundColor="#FBFAF4">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                    <Border WidthRequest="34" HeightRequest="34" StrokeThickness="0" StrokeShape="RoundRectangle 10" BackgroundColor="#F2E9D6" VerticalOptions="Center">
+                        <Label Text="↻" TextColor="#A47A3C" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                        <Label Text="{Binding ConnectionMessage}" FontSize="12" FontAttributes="Bold" TextColor="#4A513F" />
+                        <Label Text="A consulta de saúde usa a API; os dados pessoais só serão carregados após autenticação." FontSize="10" TextColor="#7F8378" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+            <Button Text="Verificar conexão" Command="{Binding RefreshCommand}" BackgroundColor="#FFFFFF" TextColor="#1F6658" BorderColor="#DCE8E2" BorderWidth="1" CornerRadius="12" HeightRequest="44" />
+
+            <Label Text="ACESSO RÁPIDO" Margin="0,5,0,0" FontSize="10" CharacterSpacing="1.2" FontAttributes="Bold" TextColor="#7B938A" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="11">
+                <Button Text="Ver eventos" Clicked="OnEventsClicked" BackgroundColor="#1F6658" TextColor="White" CornerRadius="12" HeightRequest="48" />
+                <Button Grid.Column="1" Text="Mensalidades" Clicked="OnDuesClicked" BackgroundColor="#E8F1ED" TextColor="#1F6658" CornerRadius="12" HeightRequest="48" />
+            </Grid>
+            <Label Text="O app mostra dados oficiais depois de conectar com o clube. Pedidos feitos sem conexão só serão confirmados após a API validar o horário e receber o envio." FontSize="11" TextColor="#87928D" LineBreakMode="WordWrap" Margin="0,1,0,8" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

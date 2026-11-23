@@ -1,0 +1,50 @@
+@model BootstrapViewModel
+@{
+    ViewData["Title"] = "Configuração inicial";
+}
+<section class="welcome-row">
+    <div>
+        <p class="eyebrow">PRIMEIRO ACESSO</p>
+        <h1>Criar superadmin</h1>
+        <p class="welcome-copy">Cadastre a conta que vai configurar e administrar todos os clubes.</p>
+    </div>
+</section>
+<div class="form-card login-card">
+    @if (!string.IsNullOrWhiteSpace(Model.Erro)) { <div class="form-alert" role="alert">@Model.Erro</div> }
+    @if (Model.Criado)
+    {
+        <div class="success-banner" role="status">Superadmin criado com sucesso. Agora entre no painel usando o CPF e a senha cadastrados.</div>
+        <a class="primary-link" asp-action="Entrar">Ir para entrar</a>
+    }
+    else
+    {
+        <form asp-action="CriarSuperAdmin" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+            <label asp-for="Cpf">CPF</label>
+            <input asp-for="Cpf" inputmode="numeric" autocomplete="username" placeholder="000.000.000-00" maxlength="14" />
+            <span asp-validation-for="Cpf" class="field-error"></span>
+
+            <label asp-for="Nome">Nome completo</label>
+            <input asp-for="Nome" autocomplete="name" maxlength="160" />
+            <span asp-validation-for="Nome" class="field-error"></span>
+
+            <label asp-for="Email">E-mail</label>
+            <input asp-for="Email" autocomplete="email" maxlength="200" />
+            <span asp-validation-for="Email" class="field-error"></span>
+
+            <label asp-for="Senha">Senha (mínimo de 12 caracteres)</label>
+            <input asp-for="Senha" autocomplete="new-password" />
+            <span asp-validation-for="Senha" class="field-error"></span>
+
+            <label asp-for="ConfirmarSenha">Confirmar senha</label>
+            <input asp-for="ConfirmarSenha" autocomplete="new-password" />
+            <span asp-validation-for="ConfirmarSenha" class="field-error"></span>
+
+            <button class="primary-button" type="submit">Criar superadmin</button>
+        </form>
+        <a class="form-back" asp-action="Entrar">Voltar para entrar</a>
+        <small>Esta configuração só funciona antes do primeiro superadmin ser criado.</small>
+    }
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

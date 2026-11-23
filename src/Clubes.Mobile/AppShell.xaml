@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Clubes.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Clubes"
+    Shell.BackgroundColor="#FFFFFF"
+    Shell.ForegroundColor="#18312D"
+    Shell.TitleColor="#18312D"
+    Shell.TabBarBackgroundColor="#FFFFFF"
+    Shell.TabBarForegroundColor="#1F6658"
+    Shell.TabBarTitleColor="#1F6658"
+    Shell.TabBarUnselectedColor="#82908A" />

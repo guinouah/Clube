@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Clubes.Mobile.RegisterPage" Title="Pedido de ingresso" BackgroundColor="#F6F8F6">
+    <ScrollView><VerticalStackLayout Padding="22,24" Spacing="8">
+        <Label Text="NOVO ASSOCIADO" FontSize="11" CharacterSpacing="1.5" FontAttributes="Bold" TextColor="#6B8C7E" />
+        <Label Text="Criar conta" FontSize="27" FontAttributes="Bold" TextColor="#18312D" />
+        <Label Text="Seu pedido ficará pendente até a aprovação do clube. CPF é único em todos os clubes." FontSize="12" TextColor="#71817B" />
+        <Entry x:Name="NameEntry" Placeholder="Nome completo" />
+        <Entry x:Name="CpfEntry" Placeholder="CPF" Keyboard="Numeric" MaxLength="14" />
+        <Entry x:Name="EmailEntry" Placeholder="E-mail" Keyboard="Email" />
+        <Entry x:Name="PhoneEntry" Placeholder="Telefone" Keyboard="Telephone" />
+        <Entry x:Name="PasswordEntry" Placeholder="Senha (mínimo 12 caracteres)" IsPassword="True" />
+        <Entry x:Name="AddressEntry" Placeholder="Endereço" />
+        <Entry x:Name="NeighborhoodEntry" Placeholder="Bairro" />
+        <Picker x:Name="StatePicker" Title="Selecione o estado" ItemDisplayBinding="{Binding Nome}" SelectedIndexChanged="OnStateChanged" />
+        <Picker x:Name="CityPicker" Title="Selecione o município" IsEnabled="False" />
+        <Picker x:Name="ClubPicker" Title="Clube para o pedido" ItemDisplayBinding="{Binding Nome}" />
+        <Picker x:Name="CategoryPicker" Title="Categoria solicitada" />
+        <Editor x:Name="JustificationEditor" Placeholder="Apresente-se e explique seu pedido" AutoSize="TextChanges" MinimumHeightRequest="75" />
+        <Button Text="Enviar pedido de ingresso" Clicked="OnSubmitClicked" BackgroundColor="#1F6658" TextColor="White" CornerRadius="12" />
+        <Label x:Name="StatusLabel" FontSize="12" TextColor="#71817B" />
+        <Button Text="Voltar" Clicked="OnCloseClicked" BackgroundColor="White" TextColor="#1F6658" />
+    </VerticalStackLayout></ScrollView>
+</ContentPage>

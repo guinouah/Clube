@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Clubes";
+    var clubs = (List<ClubeOption>)(ViewBag.Clubes ?? new List<ClubeOption>());
+}
+<section class="welcome-row"><div><p class="eyebrow">SUPERADMIN</p><h1>Clubes</h1><p class="welcome-copy">Cadastre e mantenha os clubes da plataforma.</p></div><a class="primary-link" asp-action="Novo">+ Novo clube</a></section>
+@if (TempData["Success"] is string success) { <div class="success-banner">@success</div> }
+@if (ViewBag.Error is string error) { <div class="form-alert">@error</div> }
+@if (TempData["Error"] is string actionError) { <div class="form-alert">@actionError</div> }
+<div class="data-list">
+    @if (clubs.Count == 0) { <p>Nenhum clube ativo cadastrado.</p> }
+    @foreach (var club in clubs) { <article class="data-row"><div class="club-mark">@club.Sigla</div><div class="club-copy"><strong>@club.Nome</strong><small>@club.Sigla · acesso ativo</small></div><form asp-action="Acessar" asp-route-id="@club.Id" method="post"><button class="small-action">Acessar clube</button></form></article> }
+</div>

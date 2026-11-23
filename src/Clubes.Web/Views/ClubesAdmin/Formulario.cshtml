@@ -1,0 +1,41 @@
+@model ClubeFormViewModel
+@{
+    ViewData["Title"] = "Novo clube";
+}
+<section class="welcome-row"><div><p class="eyebrow">SUPERADMIN</p><h1>Novo clube</h1><p class="welcome-copy">Informe os dados de contato e endereço da sede.</p></div></section>
+<div class="form-card">
+    @if (!string.IsNullOrWhiteSpace(Model.Erro)) { <div class="form-alert">@Model.Erro</div> }
+    <form asp-action="Novo" method="post">
+        @Html.AntiForgeryToken()
+        <label asp-for="Nome">Nome do clube</label><input asp-for="Nome" autocomplete="organization" /><span asp-validation-for="Nome" class="field-error"></span>
+        <label asp-for="Sigla">Sigla</label><input asp-for="Sigla" maxlength="20" /><span asp-validation-for="Sigla" class="field-error"></span>
+        <label asp-for="Endereco">Endereço</label><input asp-for="Endereco" autocomplete="street-address" />
+        <label asp-for="Bairro">Bairro</label><input asp-for="Bairro" />
+        <label asp-for="Uf">Estado</label><select asp-for="Uf" id="uf"><option value="">Selecione o estado</option>@foreach (var state in Model.Estados) { <option value="@state.Sigla">@state.Nome (@state.Sigla)</option> }</select><span asp-validation-for="Uf" class="field-error"></span>
+        <label asp-for="Cidade">Município</label><select asp-for="Cidade" id="cidade" disabled="@(Model.Municipios.Count == 0)"><option value="">Selecione primeiro o estado</option>@foreach (var city in Model.Municipios) { <option value="@city">@city</option> }</select><span asp-validation-for="Cidade" class="field-error"></span>
+        <label asp-for="Telefone">Telefone</label><input asp-for="Telefone" type="tel" autocomplete="tel" />
+        <label asp-for="Email">E-mail</label><input asp-for="Email" type="email" autocomplete="email" /><span asp-validation-for="Email" class="field-error"></span>
+        <button class="primary-button" type="submit">Salvar clube</button>
+        <a asp-action="Index" class="back-link form-back">Cancelar</a>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const stateSelect = document.getElementById('uf');
+        const citySelect = document.getElementById('cidade');
+        stateSelect.addEventListener('change', async () => {
+            citySelect.innerHTML = '<option value="">Carregando municípios…</option>';
+            citySelect.disabled = true;
+            if (!stateSelect.value) { citySelect.innerHTML = '<option value="">Selecione primeiro o estado</option>'; return; }
+            try {
+                const response = await fetch(`/admin/clubes/municipios?uf=${encodeURIComponent(stateSelect.value)}`);
+                if (!response.ok) throw new Error();
+                const cities = await response.json();
+                citySelect.innerHTML = '<option value="">Selecione o município</option>';
+                for (const city of cities) { const option = document.createElement('option'); option.value = city.nome; option.textContent = city.nome; citySelect.append(option); }
+                citySelect.disabled = false;
+            } catch { citySelect.innerHTML = '<option value="">Não foi possível carregar os municípios</option>'; }
+        });
+    </script>
+}

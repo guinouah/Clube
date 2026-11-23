@@ -1,0 +1,55 @@
+@model Clubes.Web.Models.ApiStatusViewModel
+@{
+    ViewData["Title"] = "Visão geral";
+    var modules = new List<(string, string, string, string, string)>();
+    if (User.IsInRole("SuperAdmin")) modules.Add(("clubes", "Clubes", "Dados e unidades da plataforma", "♧", "Plataforma"));
+    if (User.IsInRole("Presidente") || User.IsInRole("SuperAdmin"))
+    {
+        modules.Add(("associados", "Associados", "Pessoas e vínculos", "♙", "Cadastro"));
+        modules.Add(("solicitacoes", "Solicitações", "Pedidos e reclamações", "✉", "Atendimento"));
+        modules.Add(("eventos", "Eventos", "Agenda e público", "✳", "Clube"));
+        modules.Add(("reservas", "Reservas", "Pedidos e horários", "▦", "Espaços"));
+        modules.Add(("espacos", "Espaços", "Agenda e disponibilidade", "⌂", "Clube"));
+    }
+    if (User.IsInRole("Tesoureiro") || User.IsInRole("SuperAdmin")) modules.Add(("mensalidades", "Mensalidades", "Acompanhamento financeiro", "R$", "Tesouraria"));
+}
+
+<section class="welcome-row">
+    <div>
+        <p class="eyebrow">PAINEL DE GESTÃO</p>
+        <h1>Visão geral</h1>
+        <p class="welcome-copy">Acesse os módulos administrativos do Projeto Clubes.</p>
+    </div>
+    <div class="date-chip"><span class="date-icon">◷</span><span>Ambiente de desenvolvimento</span></div>
+</section>
+
+<section class="connection-card @(Model.Online ? "connection-online" : "connection-offline")" aria-live="polite">
+    <div class="connection-symbol">@(Model.Online && Model.DatabaseConfigured ? "✓" : "!")</div>
+    <div class="connection-copy"><strong>@Model.Message</strong><span>@(Model.Online && Model.DatabaseConfigured ? "Painel, API e MySQL estão configurados." : Model.Online ? "Cadastros e consultas precisam do banco central MySQL configurado." : "Inicie a API em outro terminal para habilitar a comunicação.")</span></div>
+    <span class="connection-label">@(Model.Online && Model.DatabaseConfigured ? "CONECTADA" : Model.Online ? "BANCO PENDENTE" : "DESCONECTADA")</span>
+</section>
+
+<div class="section-heading">
+    <div><p class="eyebrow">ACESSO RÁPIDO</p><h2>Módulos do sistema</h2></div>
+    <span class="section-caption">Escolha uma área para continuar</span>
+</div>
+
+<section class="module-grid" aria-label="Módulos administrativos">
+    @foreach (var module in modules)
+    {
+        <a class="module-card" asp-controller="Home" asp-action="Module" asp-route-id="@module.Item1">
+            <div class="module-card-top"><span class="module-icon">@module.Item4</span><span class="module-kicker">@module.Item5</span></div>
+            <h3>@module.Item2</h3>
+            <p>@module.Item3</p>
+            <span class="module-card-footer">Abrir módulo <span aria-hidden="true">→</span></span>
+        </a>
+    }
+</section>
+
+@if (modules.Count == 0) { <section class="foundation-card"><div class="foundation-icon">♙</div><div><strong>Use o aplicativo móvel</strong><p>Esta conta de associado pode consultar eventos, mensalidades, dependentes e pedidos pelo app Projeto Clubes.</p></div></section> }
+
+<section class="foundation-card">
+    <div class="foundation-icon">✦</div>
+    <div><strong>Acesso protegido pelo perfil ativo</strong><p>As operações passam pela API central e respeitam o clube selecionado e as permissões da sua conta.</p></div>
+    <span class="foundation-tag">API CENTRAL</span>
+</section>

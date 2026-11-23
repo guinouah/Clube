@@ -1,0 +1,34 @@
+## Build outputs
+**/bin/
+**/obj/
+**/obj-codex/
+**/obj-codex-android/
+/artifacts/
+.vs/
+.idea/
+
+## Local developer state
+.codex-dotnet-home/
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+appsettings.*.Local.json
+src/Clubes.Api/App_Data/*.db
+src/Clubes.Api/App_Data/*.db-shm
+src/Clubes.Api/App_Data/*.db-wal
+src/Clubes.Web/.keys/
+*.user
+*.suo
+
+## Mobile signing and packages
+*.keystore
+*.jks
+*.apk
+*.aab
+*.ipa
+*.msix
+
+## IDE and OS files
+.DS_Store
+Thumbs.db

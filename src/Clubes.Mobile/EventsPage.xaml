@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Clubes.Mobile.EventsPage"
+             Title="Eventos"
+             BackgroundColor="#F6F8F6">
+    <ScrollView>
+        <VerticalStackLayout Padding="22,26" Spacing="16">
+            <Label Text="AGENDA DO CLUBE" FontSize="11" CharacterSpacing="1.5" FontAttributes="Bold" TextColor="#6B8C7E" />
+            <Label Text="Eventos" FontSize="29" FontAttributes="Bold" TextColor="#18312D" />
+            <Label Text="Acompanhe encontros e atividades dos seus clubes." FontSize="13" TextColor="#71817B" />
+            <CollectionView ItemsSource="{Binding Events}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhum evento disponível no cache." FontSize="12" TextColor="#87928D" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="16" Margin="0,0,0,10" Stroke="#E3EAE6" StrokeShape="RoundRectangle 15" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding Nome}" FontSize="16" FontAttributes="Bold" TextColor="#18312D" />
+                                <Label Text="{Binding InicioLocal, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" FontSize="12" TextColor="#1F6658" />
+                                <Label Text="{Binding Local}" FontSize="11" TextColor="#50675E" />
+                                <Label Text="{Binding Descricao}" FontSize="12" TextColor="#71817B" />
+                                <Label Text="{Binding PublicoDescricao}" FontSize="10" TextColor="#87928D" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding Status}" FontSize="11" TextColor="#87928D" LineBreakMode="WordWrap" Margin="2,4,2,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

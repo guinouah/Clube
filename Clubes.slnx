@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Clubes.Api/Clubes.Api.csproj" />
+    <Project Path="src/Clubes.Mobile.Core/Clubes.Mobile.Core.csproj" />
+    <Project Path="src/Clubes.Mobile/Clubes.Mobile.csproj" />
+    <Project Path="src/Clubes.Web/Clubes.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Clubes.UnitTests/Clubes.UnitTests.csproj" />
+  </Folder>
+</Solution>

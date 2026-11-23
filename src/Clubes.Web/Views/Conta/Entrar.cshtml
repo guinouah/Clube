@@ -1,0 +1,21 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Entrar";
+}
+<section class="welcome-row"><div><p class="eyebrow">ACESSO SEGURO</p><h1>Entrar no painel</h1><p class="welcome-copy">Use o CPF e a senha da sua conta do Projeto Clubes.</p></div></section>
+<div class="form-card login-card">
+    @if (!string.IsNullOrWhiteSpace(Model.Erro)) { <div class="form-alert" role="alert">@Model.Erro</div> }
+    <form asp-action="Entrar" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <label asp-for="Cpf">CPF</label><input asp-for="Cpf" inputmode="numeric" autocomplete="username" placeholder="000.000.000-00" maxlength="14" />
+        <span asp-validation-for="Cpf" class="field-error"></span>
+        <label asp-for="Senha">Senha</label><input asp-for="Senha" autocomplete="current-password" />
+        <span asp-validation-for="Senha" class="field-error"></span>
+        <label asp-for="ClubeId">Clube ativo</label>
+        <select asp-for="ClubeId"><option value="">Selecione um clube</option>@foreach (var club in Model.Clubes) { <option value="@club.Id">@club.Nome (@club.Sigla)</option> }</select>
+        <button class="primary-button" type="submit">Entrar no painel</button>
+    </form>
+    <small>Primeiro acesso? <a asp-action="CriarSuperAdmin">Crie o superadmin inicial pelo site</a>.</small>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

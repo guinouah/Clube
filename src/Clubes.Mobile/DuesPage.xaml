@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Clubes.Mobile.DuesPage"
+             Title="Mensalidades"
+             BackgroundColor="#F6F8F6">
+    <ScrollView>
+        <VerticalStackLayout Padding="22,26" Spacing="16">
+            <Label Text="FINANCEIRO" FontSize="11" CharacterSpacing="1.5" FontAttributes="Bold" TextColor="#6B8C7E" />
+            <Label Text="Mensalidades" FontSize="29" FontAttributes="Bold" TextColor="#18312D" />
+            <Label Text="Consulte a situação recebida do seu clube." FontSize="13" TextColor="#71817B" />
+            <CollectionView ItemsSource="{Binding Dues}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhuma mensalidade disponível no cache." FontSize="12" TextColor="#87928D" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="14" Margin="0,0,0,9" Stroke="#E3EAE6" StrokeShape="RoundRectangle 14" BackgroundColor="White">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="5">
+                                <Label Text="{Binding CompetenciaTexto}" FontSize="16" FontAttributes="Bold" TextColor="#18312D" />
+                                <Label Grid.Column="1" Text="{Binding ValorFormatado}" FontSize="15" FontAttributes="Bold" TextColor="#1F6658" />
+                                <Label Grid.Row="1" Text="{Binding Vencimento, StringFormat='Vencimento {0:dd/MM/yyyy}'}" FontSize="11" TextColor="#71817B" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Situacao}" FontSize="11" TextColor="#A47A3C" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding Status}" FontSize="11" TextColor="#87928D" />
+            <Border Padding="15" Stroke="#E8E7DD" StrokeShape="RoundRectangle 14" BackgroundColor="#FBFAF4">
+                <Label Text="O app não permite alterar pagamentos offline. A situação exibida será somente leitura e pode ficar desatualizada até a próxima sincronização."
+                       FontSize="11" TextColor="#777C70" LineBreakMode="WordWrap" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

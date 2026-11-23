@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Clubes.Mobile.LoginPage" Title="Conta" BackgroundColor="#F6F8F6">
+    <ScrollView><VerticalStackLayout Padding="22,26" Spacing="14">
+        <Label Text="ACESSO DO ASSOCIADO" FontSize="11" CharacterSpacing="1.5" FontAttributes="Bold" TextColor="#6B8C7E" />
+        <Label Text="Sua conta" FontSize="29" FontAttributes="Bold" TextColor="#18312D" />
+        <Label Text="Entre online uma vez para guardar seus dados recentes e habilitar a fila offline." FontSize="13" TextColor="#71817B" />
+        <Border Padding="18" Stroke="#DCE8E2" StrokeShape="RoundRectangle 18" BackgroundColor="White">
+            <VerticalStackLayout Spacing="9">
+                <Label Text="CPF" FontSize="12" FontAttributes="Bold" TextColor="#42584F" />
+                <Entry x:Name="CpfEntry" Placeholder="000.000.000-00" Keyboard="Numeric" MaxLength="14" />
+                <Label Text="Senha" FontSize="12" FontAttributes="Bold" TextColor="#42584F" />
+                <Entry x:Name="PasswordEntry" Placeholder="Sua senha" IsPassword="True" />
+                <Label Text="Clube ativo" FontSize="12" FontAttributes="Bold" TextColor="#42584F" />
+                <Picker x:Name="ClubPicker" Title="Selecione um clube" ItemDisplayBinding="{Binding Nome}" />
+                <Button Text="Entrar" Clicked="OnLoginClicked" BackgroundColor="#1F6658" TextColor="White" CornerRadius="12" />
+        <Button Text="Criar conta e pedir ingresso" Clicked="OnRegisterClicked" BackgroundColor="#E8F1ED" TextColor="#1F6658" CornerRadius="12" />
+                <Label x:Name="StatusLabel" FontSize="12" TextColor="#71817B" />
+            </VerticalStackLayout>
+        </Border>
+        <Button Text="Sincronizar ações pendentes" Clicked="OnSyncClicked" BackgroundColor="#E8F1ED" TextColor="#1F6658" CornerRadius="12" />
+        <Button Text="Sair desta conta" Clicked="OnLogoutClicked" BackgroundColor="White" TextColor="#1F6658" BorderColor="#DCE8E2" BorderWidth="1" CornerRadius="12" />
+    </VerticalStackLayout></ScrollView>
+</ContentPage>

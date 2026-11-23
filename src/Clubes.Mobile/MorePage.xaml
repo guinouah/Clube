@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Clubes.Mobile.MorePage"
+             Title="Mais"
+             BackgroundColor="#F6F8F6">
+    <ScrollView>
+        <VerticalStackLayout Padding="22,26" Spacing="15">
+            <Label Text="SERVIÇOS" FontSize="11" CharacterSpacing="1.5" FontAttributes="Bold" TextColor="#6B8C7E" />
+            <Label Text="Mais opções" FontSize="29" FontAttributes="Bold" TextColor="#18312D" />
+            <Label Text="Acompanhe seus pedidos e informações." FontSize="13" TextColor="#71817B" />
+
+            <Border Padding="15" Stroke="#E3EAE6" StrokeShape="RoundRectangle 15" BackgroundColor="White">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="MEUS DADOS" FontSize="10" CharacterSpacing="1" FontAttributes="Bold" TextColor="#7B938A" />
+                    <Label x:Name="ProfileLabel" Text="Entre para carregar seus dados." FontSize="12" TextColor="#42584F" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="15" Stroke="#E3EAE6" StrokeShape="RoundRectangle 15" BackgroundColor="White">
+                <VerticalStackLayout Spacing="7">
+                    <Label Text="DEPENDENTES" FontSize="10" CharacterSpacing="1" FontAttributes="Bold" TextColor="#7B938A" />
+                    <VerticalStackLayout x:Name="DependentsList" Spacing="5" />
+                    <Entry x:Name="DependentNameEntry" Placeholder="Nome do dependente" />
+                    <Entry x:Name="DependentKinshipEntry" Placeholder="Parentesco" />
+                    <DatePicker x:Name="DependentBirthDate" />
+                    <Button Text="Adicionar dependente" Clicked="OnAddDependentClicked" BackgroundColor="#E8F1ED" TextColor="#1F6658" CornerRadius="10" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="16" Stroke="#E3EAE6" StrokeShape="RoundRectangle 15" BackgroundColor="White" Margin="0,8,0,0">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="RESERVAR UM ESPAÇO" FontSize="10" CharacterSpacing="1" FontAttributes="Bold" TextColor="#7B938A" />
+                    <Picker x:Name="SpacePicker" Title="Selecione o espaço" ItemDisplayBinding="{Binding Nome}" />
+                    <Picker x:Name="DependentPicker" Title="Reservar em nome de um dependente (opcional)" ItemDisplayBinding="{Binding NomeCompleto}" />
+                    <Entry x:Name="PurposeEntry" Placeholder="Finalidade da reserva" />
+                    <Label Text="Início" FontSize="11" TextColor="#71817B" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8"><DatePicker x:Name="StartDate" /><TimePicker x:Name="StartTime" Grid.Column="1" /></Grid>
+                    <Label Text="Término" FontSize="11" TextColor="#71817B" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8"><DatePicker x:Name="EndDate" /><TimePicker x:Name="EndTime" Grid.Column="1" /></Grid>
+                    <Button Text="Enviar ou guardar pedido" Clicked="OnReserveClicked" BackgroundColor="#1F6658" TextColor="White" CornerRadius="10" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="16" Stroke="#E3EAE6" StrokeShape="RoundRectangle 15" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="VENCIMENTO DA MENSALIDADE" FontSize="10" CharacterSpacing="1" FontAttributes="Bold" TextColor="#7B938A" />
+                    <Picker x:Name="DueDayPicker" Title="Escolha um dia disponível" />
+                    <Button Text="Salvar vencimento" Clicked="OnSaveDueDayClicked" BackgroundColor="#E8F1ED" TextColor="#1F6658" CornerRadius="10" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="16" Stroke="#E3EAE6" StrokeShape="RoundRectangle 15" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="MEUS INTERESSES" FontSize="10" CharacterSpacing="1" FontAttributes="Bold" TextColor="#7B938A" />
+                    <Label Text="Separe por vírgulas. Ex.: tênis, pesca, gastronomia" FontSize="11" TextColor="#71817B" />
+                    <Entry x:Name="InterestsEntry" Placeholder="Seus interesses" />
+                    <Button Text="Salvar interesses" Clicked="OnSaveInterestsClicked" BackgroundColor="#E8F1ED" TextColor="#1F6658" CornerRadius="10" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="16" Stroke="#E3EAE6" StrokeShape="RoundRectangle 15" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="FALE COM A ADMINISTRAÇÃO" FontSize="10" CharacterSpacing="1" FontAttributes="Bold" TextColor="#7B938A" />
+                    <Picker x:Name="ManifestTypePicker" Title="Tipo" />
+                    <Entry x:Name="SubjectEntry" Placeholder="Assunto" />
+                    <Editor x:Name="DescriptionEditor" Placeholder="Descreva sua solicitação ou reclamação" AutoSize="TextChanges" MinimumHeightRequest="80" />
+                    <Button Text="Enviar ou guardar mensagem" Clicked="OnManifestClicked" BackgroundColor="#E8F1ED" TextColor="#1F6658" CornerRadius="10" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="MEUS PEDIDOS" FontSize="10" CharacterSpacing="1" FontAttributes="Bold" TextColor="#7B938A" Margin="2,8,0,0" />
+            <VerticalStackLayout x:Name="RequestsList" Spacing="7" />
+
+            <Label x:Name="ActionStatus" Text="Pedidos offline ficam aguardando envio e não confirmam reservas." FontSize="11" TextColor="#87928D" Margin="2,4,2,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
